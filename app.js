@@ -24,7 +24,7 @@
 
 	var splitText = function(inputtext) {
 		var words = inputtext
-			.split(' ')
+			.split(/[ \n\r\t]/)
 			.map(function(w) { return w.toLowerCase().trim().replace(/^[.,-]+/,'').replace(/[.,-]+$/g,''); })
 			.filter(function(w) { return (w.length > 0); });
 		words = words.slice(0, 100);
