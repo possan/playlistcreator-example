@@ -121,15 +121,23 @@
 					word: word,
 					tracks: r.tracks.items
 						.map(function(item) {
-							return {
+							var ret = {
 								name: item.name,
-								artist: item.artists[0].name,
-								artist_uri: item.artists[0].uri,
+								artist: 'Unknown',
+								artist_uri: '',
 								album: item.album.name,
 								album_uri: item.album.uri,
-								cover_url: item.album.images[item.album.images.length - 1].url,
+								cover_url: '',
 								uri: item.uri
-							};
+							}
+							if (item.artists.length > 0) {
+								ret.artist = item.artists[0].name;
+								ret.artist_uri = item.artists[0].uri;
+							}
+							if (item.album.images.length > 0) {
+								ret.cover_url = item.album.images[item.album.images.length - 1].url;
+							}
+							return ret;
 						})
 				});
 			},
