@@ -49,6 +49,10 @@
 			worddata.forEach(function(data) {
 				console.log('word', data.word);
 
+				data.tracks.sort(function(a,b) {
+					return Math.random() - 0.5;
+				})
+
 				var names = data.tracks.map(function(track) {
 					return track.name;
 				});
@@ -63,9 +67,17 @@
 				var title = '';
 
 				if (!found) {
+					data.tracks.forEach(function(track) {
+						if (track.name.toLowerCase().trim() === data.word.toLowerCase().trim()) {
+							found = track;
+						}
+					});
+				}
+
+				if (!found) {
 					if (fr && fr.length > 0) {
 						data.tracks.forEach(function(track) {
-							if (track.name == fr[0][1]) {
+							if (track.name === fr[0][1]) {
 								found = track;
 							}
 						});
