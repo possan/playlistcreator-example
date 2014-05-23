@@ -1,24 +1,59 @@
 <html>
 <head>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
-	<script type="text/javascript" src="fuzzyset.js"></script>
-	<script type="text/javascript" src="wordcache.js"></script>
-	<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="fuzzyset.js"></script>
+<script type="text/javascript" src="wordcache.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css" />
+<style type="text/css">
+
+	.jumbotron {
+		background-color: #333;
+		color: #fff;
+	}
+
+	.jumbotron p {
+		color: #aaa;
+	}
+
+	.jumbotron a {
+		color: #fa5;
+	}
+
+</style>
 </head>
 <body onload="startApp()">
 
-	<textarea id="alltext" style="width:800px;height:150px;" placeholder="Write some text here..."></textarea>
-	<br/>
+	<!-- Main jumbotron for a primary marketing message or call to action -->
+	<div class="jumbotron">
+		<div class="container">
+			<h2>Spotify WebAPI Playlist creation example</h2>
+			<p>
+				Browse the sourcecode on <a href="https://github.com/possan/playlistcreator-example">GitHub</a>, 
+				Example by <a href="https://twitter.com/possan">@possan</a>
+			</p>
+		</div>
+	</div>
 
-	<button id="start">Generate me a playlist please!</button>
-	<br/>
-	<br/>
-
-	<pre id="debug"></pre>
-	<br/>
-	<br/>
-
-	<a href="https://github.com/possan/playlistcreator-example">sourcecode is available on github</a>
-
+	<div class="container">
+		<!-- Example row of columns -->
+		<div class="row">
+			<div class="col-md-6">
+			<h2>Your text</h2>
+				<div class="form-group">
+					<textarea class="form-control" id="alltext" rows="5" maxlength="500" placeholder="Write some text here..."></textarea>
+				</div>
+				<p>
+					<button class="btn btn-lg btn-primary btn-success" id="start">Create a Spotify playlist!</button>
+				</p>
+				<div id="status"></div>
+			</div>
+			<div class="col-md-6">
+				<h2>Found tracks</h2>
+				<div id="debug"></div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

@@ -5,6 +5,20 @@
 	var g_name = '';
 	var g_tracks = '';
 
+	function setStatus(text) {
+		if (text != '') {
+			$('#status').html(
+				'<div class="progress progress-striped active">' +
+				'<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">' +
+			    text +
+			 	'</div>' +
+				'</div>'
+			);
+		} else {
+			$('#status').html('');
+		}
+	}
+
 	var Playlist = function() {
 	}
 
@@ -18,10 +32,15 @@
 	}
 
 	var refreshText = function() {
+		setStatus('Updating text...');
+
 		g_name = $('#alltext').val().trim();
 		var words = splitText(g_name);
 		console.log('text changed.', g_name, words);
 		cache.lookupWords(words, function(worddata) {
+
+			setStatus('');
+
 			console.log('wordcache callback', worddata);
 			// $('#debug').text(JSON.stringify(worddata, null, 2));
 
@@ -40,32 +59,42 @@
 				var fr = f.get(data.word);
 				console.log('fr', fr);
 
-				var uri = '';
+				var found = null;
 				var title = '';
-				if (fr && fr.length > 0) {
-					data.tracks.forEach(function(track) {
-						if (track.name == fr[0][1]) {
-							uri = track.uri;
-							title = track.name;
-						}
-					});
-				}
-				if (uri == '') {
-					if (data.tracks.length > 0) {
-						uri = data.tracks[0].uri;
-						title = data.tracks[0].name;
+
+				if (!found) {
+					if (fr && fr.length > 0) {
+						data.tracks.forEach(function(track) {
+							if (track.name == fr[0][1]) {
+								found = track;
+							}
+						});
 					}
 				}
 
-				console.log('uri', uri);
-				if (uri != '') {
-					g_tracks.push(uri);
+				if (!found) {
+					if (data.tracks.length > 0) {
+						found = data.tracks[0];
+					}
+				}
 
-					txt += uri+':\t' + title + '\n';
+				console.log('found', found);
+				if (found) {
+					g_tracks.push(found.uri);
+					txt += '<div class="media">' +
+						'<a class="pull-left" href="#"><img class="media-object" src="' + found.cover_url + '" /></a>' +
+						'<div class="media-body">' +
+						'<h4 class="media-heading"><a href="' + found.uri + '">' + found.name + '</a></h4>' +
+						'from <a href="' + found.album_uri + '">' + found.album +
+						'</a> by <a href="' + found.artist_uri + '">' + found.artist+'</a>' +
+						'</div>' +
+						'</div>\n';
+				} else {
+					txt += '<div class="media">No good match for "' + data.word+ '" not found.</div>\n'
 				}
 			});
 
-			$('#debug').text(txt);
+			$('#debug').html(txt);
 		});
 	}
 
@@ -80,10 +109,15 @@
 					word: word,
 					tracks: r.tracks.items
 						.map(function(item) {
-							return { name: item.name, uri: item.uri };
-						})
-						.sort(function(t1, t2) {
-							return 0;
+							return {
+								name: item.name,
+								artist: item.artists[0].name,
+								artist_uri: item.artists[0].uri,
+								album: item.album.name,
+								album_uri: item.album.uri,
+								cover_url: item.album.images[item.album.images.length - 1].url,
+								uri: item.uri
+							};
 						})
 				});
 			},
@@ -100,6 +134,7 @@
 		var word = cache.pop();
 		if (word) {
 			console.log('time to resolve word', word);
+			setStatus('Looking up the word "' + word + '"');
 			doSearch(word, function(result) {
 				console.log('got word result', result);
 				cache.store(word, result);
@@ -131,19 +166,34 @@
 			'&response_type=token' +
 			'&scope=playlist-read-private%20playlist-modify%20playlist-modify-private' +
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
-
 		localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
 		localStorage.setItem('createplaylist-name', g_name);
-
 		var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
 	}
 
+	var refreshtimer = 0;
+	var queueRefreshText = function() {
+		if (refreshtimer) {
+			clearTimeout(refreshtimer);
+		}
+		refreshtimer = setTimeout(function() {
+			refreshText();
+		}, 1000);
+	}
+
 	exports.startApp = function() {
+		setStatus('');
 		console.log('start app.');
-		$('#alltext').keyup(function() { refreshText(); });
+		$('#alltext').keyup(function() {
+			queueRefreshText();
+		});
+		$('#alltext').change(function() {
+			queueRefreshText();
+		});
 		$('#start').click(function() {
 			doLogin(function() {});
 		})
+		$('#alltext').text('hello world');
 		refreshText();
 		resolveOneWord();
 }
