@@ -60,7 +60,7 @@ function addTracksToPlaylist(username, playlist, tracks, callback) {
 	$.ajax(url, {
 		method: 'POST',
 		data: JSON.stringify(tracks),
-		dataType: 'json',
+		dataType: 'text',
 		headers: {
 			'Authorization': 'Bearer ' + g_access_token,
 			'Content-Type': 'application/json'
