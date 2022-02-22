@@ -2,12 +2,12 @@
 layout: default
 ---
 
-<div class="container">
-    <div id="login">
-        <h1>This is an example of the Authorization Code flow</h1>
-        <a href="/login" class="btn btn-primary">Log in with Spotify</a>
+<div class="columns">
+    <div class="column left" id="login">
+        <h3 class="title is-3">This is an example of the Authorization Code flow</h3>
+        <a href="/login.html" class="button is-success">Log in with Spotify</a>
     </div>
-    <div id="loggedin">
+    <div class="column right" id="loggedin">
         <div id="user-profile"></div>
         <div id="oauth"></div>
         <button class="button is-success" id="obtain-new-token">Obtain new token using the refresh token</button>
