@@ -6,12 +6,12 @@
 	var g_tracks = '';
 
 	function setStatus(text) {
-		if(text != null){
+		if(text != ''){
 			$('#status').html(
 				'<progress class="progress is-primary is-small" max="100">15%</progress>'
 			);
 		} else {
-			$('#status').html();
+			$('#status').html('');
 		}
 	}
 
@@ -28,7 +28,7 @@
 	}
 
 	var refreshText = function() {
-		setStatus('');
+		setStatus('Loading...');
 
 		g_name = $('#alltext').val().trim();
 		var words = splitText(g_name);
