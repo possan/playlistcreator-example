@@ -5,18 +5,10 @@
 	var g_name = '';
 	var g_tracks = '';
 
-	function setStatus(text) {
-		if (text != '') {
-			$('#status').html(
-				'<div class="progress progress-striped active">' +
-				'<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">' +
-			    text +
-			 	'</div>' +
-				'</div>'
-			);
-		} else {
-			$('#status').html('');
-		}
+	function setStatus() {
+		$('#status').html(
+			'<progress class="progress is-primary" max="100">15%</progress>'
+		);
 	}
 
 	var Playlist = function() {
@@ -32,14 +24,13 @@
 	}
 
 	var refreshText = function() {
-		setStatus('Updating text...');
+		setStatus();
 
 		g_name = $('#alltext').val().trim();
 		var words = splitText(g_name);
 		console.log('text changed.', g_name, words);
 		cache.lookupWords(words, function(worddata) {
-
-			setStatus('');
+			setStatus();
 
 			console.log('wordcache callback', worddata);
 			// $('#debug').text(JSON.stringify(worddata, null, 2));
@@ -93,13 +84,18 @@
 				console.log('found', found);
 				if (found) {
 					g_tracks.push(found.uri);
-					txt += '<div class="media">' +
-						'<a class="pull-left" href="#"><img class="media-object" src="' + found.cover_url + '" /></a>' +
-						'<div class="media-body">' +
-						'<h4 class="media-heading"><a href="' + found.uri + '">' + found.name + '</a></h4>' +
-						'Album: <a href="' + found.album_uri + '">' + found.album +
-						'</a><br/>Artist: <a href="' + found.artist_uri + '">' + found.artist+'</a>' +
-						'</div>' +
+					txt += 
+						'<div class="media">' +
+							'<a class="pull-left" href="#">' +
+								'<img class="media-object" src="' + found.cover_url + '" />' +
+							'</a>' +
+							'<div class="media-body">' + 	
+								'<h4 class="media-heading">'+
+									'<a href="' + found.uri + '">' + found.name + '</a>'+
+								'</h4>' +
+								'Album: <a href="' + found.album_uri + '">' + found.album +'</a>'+
+								'<br />Artist: <a href="' + found.artist_uri + '">' + found.artist+'</a>' +
+							'</div>' +
 						'</div>\n';
 				} else {
 					txt += '<div class="media">No match found for the word "' + data.word+ '"</div>\n'
