@@ -5,10 +5,14 @@
 	var g_name = '';
 	var g_tracks = '';
 
-	function setStatus() {
-		$('#status').html(
-			'<progress class="progress is-primary is-small" max="100">15%</progress>'
-		);
+	function setStatus(text) {
+		if(text != null){
+			$('#status').html(
+				'<progress class="progress is-primary is-small" max="100">15%</progress>'
+			);
+		} else {
+			$('#status').html();
+		}
 	}
 
 	var Playlist = function() {
@@ -24,13 +28,13 @@
 	}
 
 	var refreshText = function() {
-		setStatus();
+		setStatus('');
 
 		g_name = $('#alltext').val().trim();
 		var words = splitText(g_name);
 		console.log('text changed.', g_name, words);
 		cache.lookupWords(words, function(worddata) {
-			setStatus();
+			setStatus('');
 
 			console.log('wordcache callback', worddata);
 			// $('#debug').text(JSON.stringify(worddata, null, 2));
