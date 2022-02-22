@@ -1,0 +1,58 @@
+name: Playlist Generator
+title: Playlist Generator
+description: Create your Spotify Playlist
+baseurl: 
+
+include: ["_pages"]
+permalink: /:title/
+
+# Plugins
+plugins: 
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jekyll-pug
+
+authors:
+  milla:  
+    name:           Camila L. Oliveira
+    site:           https://camilaloliveira.com.br
+    avatar:         media/images/avatar_milla.png
+    bio:            "Tecnóloga em Análise e Desenvolvimento de Sistemas, Bacharel em Administração Pública, Programadora de Computadores e Dispositivos Móveis e Técnica em Informática para Internet. 
+      Com experiências nas empresas TCS e BRQ, atuando no desenvolvimento de soluções aos clientes há mais de 2 anos."
+    email:          ola@camilaloliveira.com.br
+    twitter:        https://twitter.com/millaloliveira
+    linkedin:       https://linkedin.com/in/clcmo
+    facebook:       https://facebook.com/millaloliveira
+
+
+# Defaults
+defaults:
+
+  # all posts
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+      author: milla
+      avatar: /media/images/avatar_milla.png
+      
+  # all pages
+  - scope:
+      path: "_pages"
+    values:
+      layout: page
+      
+# Syntax
+markdown: kramdown
+highlighter: rouge
+
+# Paginate
+paginate: 10
+
+
+
+# Exclude metadata and development time dependencies (like Grunt plugins)
+exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]
+
