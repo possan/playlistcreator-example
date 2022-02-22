@@ -10,10 +10,11 @@ layout: default
         </div>
         <br />
         <button class="button is-success" id="start">Create a Spotify playlist!</button>
-        <div id="status"></div>
     </div>
     <div class="column right">
         <h3 class="title is-3">Corresponding track names</h3>
+        <div id="status"></div>
+        <br />
         <div id="debug"></div>
     </div>
 </div>

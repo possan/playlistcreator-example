@@ -7,7 +7,7 @@
 
 	function setStatus() {
 		$('#status').html(
-			'<progress class="progress is-primary" max="100">15%</progress>'
+			'<progress class="progress is-primary is-small" max="100">15%</progress>'
 		);
 	}
 
