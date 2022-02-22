@@ -1,7 +1,7 @@
 name: Playlist Generator
 title: Playlist Generator
 description: Create your Spotify Playlist
-baseurl: http://clcmo.github.io/playlistcreator-example/
+baseurl: http://lab.portalurbanna.com.br/
 
 include: ["_pages"]
 permalink: /:title/
