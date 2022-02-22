@@ -5,7 +5,7 @@ layout: default
 <div class="columns">
     <div class="column left" id="login">
         <h3 class="title is-3">This is an example of the Authorization Code flow</h3>
-        <a href="/login.html" class="button is-success">Log in with Spotify</a>
+        <a href="/login" class="button is-success">Log in with Spotify</a>
     </div>
     <div class="column right" id="loggedin">
         <div id="user-profile"></div>
