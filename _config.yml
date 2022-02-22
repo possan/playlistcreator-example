@@ -1,7 +1,7 @@
 name: Playlist Generator
 title: Playlist Generator
 description: Create your Spotify Playlist
-baseurl: http://lab.portalurbanna.com.br/
+baseurl: http://dev.portalurbanna.com.br/
 
 include: ["_pages"]
 permalink: /:title/
