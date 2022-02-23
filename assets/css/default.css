@@ -1,0 +1,10 @@
+.column left {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+  }
+  
+  .column right {
+    position: absolute;
+    width: 50%;
+}

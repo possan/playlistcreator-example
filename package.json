@@ -1,0 +1,13 @@
+{
+    "name": "playlistcreator-example-1",
+    "lockfileVersion": 2,
+    "requires": true,
+    "packages": {
+      "cookie-parser": "1.3.2",
+      "express": "~4.16.0",
+      "cors": "^2.8.4",
+      "querystring": "~0.2.0",
+      "request": "~2.83.0"
+    }
+  }
+  

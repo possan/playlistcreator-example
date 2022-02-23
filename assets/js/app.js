@@ -6,13 +6,9 @@
 	var g_tracks = '';
 
 	function setStatus(text) {
-		if (text != '') {
+		if(text != ''){
 			$('#status').html(
-				'<div class="progress progress-striped active">' +
-				'<div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">' +
-			    text +
-			 	'</div>' +
-				'</div>'
+				'<progress class="progress is-primary is-small" max="100">15%</progress>'
 			);
 		} else {
 			$('#status').html('');
@@ -32,13 +28,12 @@
 	}
 
 	var refreshText = function() {
-		setStatus('Updating text...');
+		setStatus('Loading...');
 
 		g_name = $('#alltext').val().trim();
 		var words = splitText(g_name);
 		console.log('text changed.', g_name, words);
 		cache.lookupWords(words, function(worddata) {
-
 			setStatus('');
 
 			console.log('wordcache callback', worddata);
@@ -93,13 +88,18 @@
 				console.log('found', found);
 				if (found) {
 					g_tracks.push(found.uri);
-					txt += '<div class="media">' +
-						'<a class="pull-left" href="#"><img class="media-object" src="' + found.cover_url + '" /></a>' +
-						'<div class="media-body">' +
-						'<h4 class="media-heading"><a href="' + found.uri + '">' + found.name + '</a></h4>' +
-						'Album: <a href="' + found.album_uri + '">' + found.album +
-						'</a><br/>Artist: <a href="' + found.artist_uri + '">' + found.artist+'</a>' +
-						'</div>' +
+					txt += 
+						'<div class="media">' +
+							'<a class="pull-left" href="#">' +
+								'<img class="media-object" src="' + found.cover_url + '" />' +
+							'</a>' +
+							'<div class="media-body">' + 	
+								'<h4 class="media-heading">'+
+									'<a href="' + found.uri + '">' + found.name + '</a>'+
+								'</h4>' +
+								'Album: <a href="' + found.album_uri + '">' + found.album +'</a>'+
+								'<br />Artist: <a href="' + found.artist_uri + '">' + found.artist+'</a>' +
+							'</div>' +
 						'</div>\n';
 				} else {
 					txt += '<div class="media">No match found for the word "' + data.word+ '"</div>\n'
@@ -173,12 +173,12 @@
 	var redirect_uri = '';
 
 
-	if (location.host == 'localhost:8000') {
-		client_id = 'd37a9e88667b4fb3bc994299de2a52bd';
-		redirect_uri = 'http://localhost:8000/callback.html';
+	if (location.host == 'localhost:8888') {
+		client_id = '2a8909c2980143c496833de968725bf0';
+		redirect_uri = 'http://localhost:8888/callback.html';
 	} else {
-		client_id = '6f9391eff32647baa44b1a700ad4a7fc';
-		redirect_uri = 'http://lab.possan.se/playlistcreator-example/callback.html';
+		client_id = '2a8909c2980143c496833de968725bf0';
+		redirect_uri = 'https://dev.portalurbanna.com.br/callback.html';
 	}
 
 	var doLogin = function(callback) {
@@ -188,7 +188,7 @@
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
 		localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
 		localStorage.setItem('createplaylist-name', g_name);
-		var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
+		var w = window.open(url, 'asdf', 'WIDTH=400, HEIGHT=500');
 	}
 
 	var refreshtimer = 0;
