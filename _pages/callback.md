@@ -1,5 +1,6 @@
 ---
 layout: default
+permalink: "/callback.html"
 ---
 
 <div class="columns">

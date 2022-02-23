@@ -1,8 +1,8 @@
 var g_access_token = "";
-  var g_username = "";
-  var g_tracks = [];
+var g_username = "";
+var g_tracks = [];
   
-  function getUsername(callback) {
+function getUsername(callback) {
     console.log("getUsername");
     var url = "https://api.spotify.com/v1/me";
     $.ajax(url, {
@@ -18,9 +18,9 @@ var g_access_token = "";
         callback(null);
       }
     });
-  }
+}
   
-  function createPlaylist(username, name, callback) {
+function createPlaylist(username, name, callback) {
     console.log("createPlaylist", username, name);
     var url = "https://api.spotify.com/v1/users/" + username + "/playlists";
     $.ajax(url, {
@@ -42,9 +42,9 @@ var g_access_token = "";
         callback(null);
       }
     });
-  }
+}
   
-  function addTracksToPlaylist(username, playlist, tracks, callback) {
+function addTracksToPlaylist(username, playlist, tracks, callback) {
     console.log("addTracksToPlaylist", username, playlist, tracks);
     var url =
       "https://api.spotify.com/v1/users/" +
@@ -68,9 +68,9 @@ var g_access_token = "";
         callback(null);
       }
     });
-  }
+}
   
-  function doit() {
+function doit() {
     // parse hash
     var hash = location.hash.replace(/#/g, "");
     var all = hash.split("&");
@@ -109,4 +109,4 @@ var g_access_token = "";
         });
       });
     });
-  }
+}

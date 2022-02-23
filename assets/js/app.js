@@ -173,12 +173,12 @@
 	var redirect_uri = '';
 
 
-	if (location.host == 'localhost:8000') {
-		client_id = 'd37a9e88667b4fb3bc994299de2a52bd';
-		redirect_uri = 'http://localhost:8000/callback.html';
+	if (location.host == 'localhost:8888') {
+		client_id = '2a8909c2980143c496833de968725bf0';
+		redirect_uri = 'http://localhost:8888/callback.html';
 	} else {
-		client_id = '6f9391eff32647baa44b1a700ad4a7fc';
-		redirect_uri = 'http://lab.possan.se/playlistcreator-example/callback.html';
+		client_id = '2a8909c2980143c496833de968725bf0';
+		redirect_uri = 'https://dev.portalurbanna.com.br/callback.html';
 	}
 
 	var doLogin = function(callback) {
@@ -188,7 +188,7 @@
 			'&redirect_uri=' + encodeURIComponent(redirect_uri);
 		localStorage.setItem('createplaylist-tracks', JSON.stringify(g_tracks));
 		localStorage.setItem('createplaylist-name', g_name);
-		var w = window.open(url, 'asdf', 'WIDTH=400,HEIGHT=500');
+		var w = window.open(url, 'asdf', 'WIDTH=400, HEIGHT=500');
 	}
 
 	var refreshtimer = 0;
